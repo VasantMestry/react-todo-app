@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import TodoItem from './TodoItem.js'
+import TodoItem from '../TodoItem/TodoItem.js'
 import './TodoList.css'
 
 
@@ -11,21 +11,23 @@ class TodoList extends Component{
 			todoList:[
 				{
 					name: "buy milk",
-					id: 1234567,
+					id: 123,
 					completed: false
 				}
 			],
-			todo: ''
+			todo: '',
+			buttonName: 'Add Todo',
+			editingName: ''
 		}
 	}
 
-	handleChange = (e) =>{
+	handleChange = (e) => {
 		this.setState({
 			todo: e.target.value
 		})
 	}
 
-	handleClick = (e) =>{
+	handleClick = () =>{
 		const { todoList, todo } = this.state;
 		let temp = [...todoList];
 		let todoTask = {
@@ -69,8 +71,33 @@ class TodoList extends Component{
 		})
 	}
 
+	handleEdit = (editingTodo) => {
+		this.setState({
+			buttonName: "Edit Todo",
+			todo: editingTodo.name,
+			editingName: editingTodo
+		})
+	}
+
+	updateTodo = () => {
+		const { todoList, todo, editingName } = this.state;
+		let temp = [...todoList];
+
+		temp.map((newtodo) => {
+			if (newtodo.id === editingName.id) {
+				newtodo.name = todo
+			}
+		})
+
+		this.setState({
+			todoList: temp,
+			buttonName: "Add Todo",
+			todo: ''
+		})
+	}
+
 	render(){
-		const { todo, todoList } = this.state;
+		const { todo, todoList, buttonName } = this.state;
 
 		return (
 			<div className='container'>
@@ -86,11 +113,11 @@ class TodoList extends Component{
 								placeholder="Add Task"
 							/>
 							<button 
-								onClick={this.handleClick}
+								onClick={buttonName === 'Edit Todo' ? this.updateTodo : this.handleClick}
 								disabled={!todo}
 								className={`addBtn`}
 							>
-								Add Todo
+								{buttonName}
 							</button>
 							<button 
 								onClick={this.handleClearAll}
@@ -106,6 +133,7 @@ class TodoList extends Component{
 						todoList={todoList}
 						handleComplete={this.handleComplete}
 						handleDelete={this.handleDelete}
+						handleEdit={this.handleEdit}
 					/>
 				</div>
 			</div>

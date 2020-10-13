@@ -4,7 +4,7 @@ import './TodoItem.css'
 class TodoItem extends Component {
 
 	addTask = (todo) => {
-		const { handleComplete, handleDelete } = this.props;
+		const { handleComplete, handleDelete, handleEdit } = this.props;
 
 		return (
 			<div 
@@ -21,13 +21,19 @@ class TodoItem extends Component {
 							className={`completeBtn`}
 							onClick={()=>handleComplete(todo.id)}
 						>
-							Complete
+							&#10004;
+						</button>
+						<button
+							className={`editBtn`}
+							onClick={() => handleEdit(todo)}
+						>
+							&#9998;
 						</button>
 						<button
 							className={`deleteBtn`}
-							onClick={()=> handleDelete(todo.id)}
+							onClick={() => handleDelete(todo.id)}
 						>
-							X
+							&#128465;
 						</button>
 					</div>
 				</li>
