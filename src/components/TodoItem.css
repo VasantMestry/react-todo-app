@@ -1,0 +1,54 @@
+.empty {
+	margin-top: 20px;
+	color: #fff;
+}
+.list {
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.list li {
+	padding: 10px;
+	list-style-type: none;
+	border-radius: 5px;
+	min-width: 325px;
+	margin-bottom: 15px;
+	word-wrap: break-word;
+	font-weight: 400;
+	background: rgba(0,0,0,0.3);
+	color: #fff;
+	text-transform: capitalize;
+}
+
+.listItems {
+	display: flex;
+	justify-content: space-between;
+}
+
+.listItems.completed span{
+	text-decoration: line-through;
+	color: #fff;
+}
+
+.icons button{
+	margin: 0px 5px;
+}
+
+.completeBtn {
+	border: none;
+	background: rgba(0,150,0,0.6);
+	outline: none;
+	padding: 5px 10px;
+	color: #fff;
+}
+
+.deleteBtn {
+	border: none;
+	background: rgba(255,0,0,0.6);
+	outline: none;
+	padding: 5px 10px;
+	color: #fff;
+}
