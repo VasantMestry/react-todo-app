@@ -55,3 +55,47 @@
 	cursor: no-drop;
 }
 
+.completeAllBtn {
+	border: none;
+	background: rgba(0,150,0,0.6);
+	outline: none;
+	margin-left: 20px;
+	padding: 10px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.completeAllBtn:disabled {
+	opacity: 0.3;
+	cursor: no-drop;
+}
+
+.completeSelectedBtn{
+	border: none;
+	background: rgba(0,0,0,0.61);
+	outline: none;
+	margin-left: 20px;
+	padding: 10px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.completeSelectedBtn:disabled {
+	opacity: 0.3;
+	cursor: no-drop;
+}
+
+.deleteAllBtn {
+	border: none;
+	background: rgba(255,0,0,0.6);
+	outline: none;
+	margin-left: 20px;
+	padding: 10px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.deleteAllBtn:disabled {
+	opacity: 0.3;
+	cursor: no-drop;
+}
