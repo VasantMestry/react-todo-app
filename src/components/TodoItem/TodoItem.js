@@ -3,6 +3,30 @@ import './TodoItem.css'
 
 class TodoItem extends Component {
 
+	constructor(props) {
+		super(props)
+		this.source = ''
+	}
+	
+	onDragStart = (e) => {
+		e.dataTransfer.setData('id', e.target.innerHTML)
+		this.source = e.target;
+		// console.log(this.source)
+		e.dataTransfer.effectAllowed = "move";
+	}
+
+	onDragOver = (e) => {
+		e.preventDefault();
+		e.dataTransfer.dropEffect = "move";
+	}
+
+	onDrop = (e) => {
+		// let id = e.dataTransfer.getData("id");
+		this.source.innerHTML = e.target.innerHTML;
+		// console.log(id)
+		e.target.innerHTML = e.dataTransfer.getData("id");
+	}
+
 	addTask = (todo, index) => {
 		const {
 			handleComplete,
@@ -13,26 +37,40 @@ class TodoItem extends Component {
 		return (
 			<div 
 				className={`listItems`}
-				key={index}
-				id={index}
+				key={todo.id}
+				// draggable="true" 
+				// onDragOver={(e) => this.onDragOver(e)}
+				// onDrop={(e) => this.onDrop(e)}
+				// onDragStart={(e)=> this.onDragStart(e)}
 			>
 				<li 
 					key={todo.id}
 					className={`listItems ${todo.completed ? 'completed': ''}`}
+					draggable="true" 
+					// onDragOver={(e) => this.onDragOver(e)}
+					onDrop={(e) => this.onDrop(e)}
+					onDragStart={(e)=> this.onDragStart(e)}
 				>
+					<span
+						className = {`dragIcon`}
+					>
+						&#8942;
+					</span>
 					<input 
 						type="checkbox" 
 						className={`checkBoxes`}
-						onChange={() => handleCheckBoxes(index)}
+						onChange={() => handleCheckBoxes(todo.id)}
 					/>
-						<input
-							value={todo.name}
-							onChange={(e)=> handleEdit(e.target.value, todo.id)}
-						/>
+					<input
+						value={todo.name}
+						onChange={(e)=> handleEdit(e.target.value, todo.id)}
+						className={`task`}
+					/>
 					<div className={`icons`}>
 						<button
 							className={`completeBtn`}
 							onClick={()=>handleComplete(todo.id)}
+							id={todo.id}
 						>
 							&#10004;
 						</button>
@@ -60,9 +98,12 @@ class TodoItem extends Component {
 
 		if (todoList.length > 0) {
 			return (
-				<ul className={`list`}>
+				<ul className={`list`}
+					onDragOver={(e) => this.onDragOver(e)}
+					// onDrop={(e) => this.onDrop(e)}
+				>
 					{
-						todoList.map((todo, index)=> this.addTask(todo, index))
+					todoList.map((todo, index)=> this.addTask(todo, index))
 					}
 				</ul>
 			)

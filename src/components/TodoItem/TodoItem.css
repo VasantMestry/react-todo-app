@@ -10,7 +10,7 @@
 	flex-direction: column;
 }
 
-.list li {
+.list li{
 	padding: 10px;
 	list-style-type: none;
 	border-radius: 5px;
@@ -38,6 +38,10 @@
 	border: none;
 	outline: none;
 	color: #fff;
+}
+
+.listItems .task {
+	text-transform: capitalize;
 }
 
 .icons button{
@@ -74,4 +78,12 @@
 
 .checkBoxes {
 	margin-top: 5px;
+}
+
+.dragIcon {
+	cursor: move;
+}
+
+.dragging {
+	opacity: .5;
 }

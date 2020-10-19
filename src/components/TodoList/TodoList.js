@@ -57,6 +57,7 @@ class TodoList extends Component{
 	}
 
 	handleComplete = (index) => {
+		console.log(index)
 		const { todoList } = this.state;
 		let temp = [...todoList];
 		temp.map((todo)=>{
@@ -114,12 +115,16 @@ class TodoList extends Component{
 	}
 
 	handleCheckBoxes = (checkBoxIndex) => {
+		// debugger;
 		let result = this.selection.indexOf(checkBoxIndex);
+		// debugger;
 		(result === -1) &&
-			(this.selection.push(checkBoxIndex)) ||
+		(this.selection.push(checkBoxIndex)) ||
 				this.selection.splice(result, 1)
-
+		console.log(result)
 		console.log(this.selection)
+				
+		// console.log(this.selection)
 		// if (this.selection.indexOf(checkBoxIndex) === -1) {
 		// 	this.selection.unshift(checkBoxIndex)
 		// } else {
@@ -135,7 +140,8 @@ class TodoList extends Component{
 
 		let temp = [...todoList];
 		temp = temp.map((ele, index) => {
-			selection.indexOf(index) !== -1 && (
+			console.log(selection.indexOf(ele.id))
+			selection.indexOf(ele.id) !== -1 && (
 				ele.completed = true
 			)
 			return ele
@@ -152,7 +158,7 @@ class TodoList extends Component{
 		let temp = [...todoList];
 
 		temp = temp.filter((todo, index) => {
-			 return selection.indexOf(index) === -1
+			 return selection.indexOf(todo.id) === -1
 		})
 
 		this.setState({
