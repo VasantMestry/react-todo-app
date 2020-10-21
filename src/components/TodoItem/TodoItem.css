@@ -23,6 +23,17 @@
 	text-transform: capitalize;
 }
 
+.list li.completed {
+	background: #f6d55c;
+	/* color: #000; */
+}
+
+
+.list li.completed  .dragIcon{
+	/* background: #f6d55c; */
+	color: #000;
+}
+
 .listItems {
 	display: flex;
 	justify-content: space-between;
@@ -30,7 +41,7 @@
 
 .listItems.completed input{
 	text-decoration: line-through;
-	color: #fff;
+	color: #000;
 }
 
 .listItems input {
@@ -62,7 +73,7 @@
 	background: rgba(255,0,0,0.6);
 	outline: none;
 	padding: 5px 10px;
-	color: #fff;
+	/* color: #000; */
 	cursor: pointer;
 }
 

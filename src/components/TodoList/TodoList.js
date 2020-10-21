@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
 import TodoItem from '../TodoItem/TodoItem.js'
+import { DragDropContext } from 'react-beautiful-dnd'
 import './TodoList.css'
 
+const reorder = (list, startIndex, endIndex) => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex,1);
+  result.splice(endIndex,0, removed);
+  return result;
+}
 
 class TodoList extends Component{
 
@@ -56,12 +63,12 @@ class TodoList extends Component{
 		})
 	}
 
-	handleComplete = (index) => {
-		console.log(index)
+	handleComplete = (todoId) => {
+		console.log(todoId)
 		const { todoList } = this.state;
 		let temp = [...todoList];
 		temp.map((todo)=>{
-			if (todo.id === index) {
+			if (todo.id === todoId) {
 				todo.completed = !todo.completed;
 			}
 		})
@@ -70,11 +77,11 @@ class TodoList extends Component{
 		})
 	}
 
-	handleDelete = (index) =>{
+	handleDelete = (todoId) =>{
 		const { todoList } = this.state;
 		let temp = [...todoList];
 		alert('Sure To Delete task')
-		temp = temp.filter((todo)=> todo.id !== index)
+		temp = temp.filter((todo)=> todo.id !== todoId)
 		this.setState({
 			todoList: [...temp]
 		})
@@ -115,9 +122,7 @@ class TodoList extends Component{
 	}
 
 	handleCheckBoxes = (checkBoxIndex) => {
-		// debugger;
 		let result = this.selection.indexOf(checkBoxIndex);
-		// debugger;
 		(result === -1) &&
 		(this.selection.push(checkBoxIndex)) ||
 				this.selection.splice(result, 1)
@@ -183,6 +188,26 @@ class TodoList extends Component{
 		})
 	}
 
+
+	onDragEnd = (result) => {
+
+    const { destination, source } = result
+
+		if(!destination){
+      return
+    }
+
+    const list = reorder(
+      this.state.todoList,
+      source.index,
+      destination.index
+    );
+
+    this.setState({
+      todoList: list
+    })
+	}
+
 	render(){
 		const { todo, todoList } = this.state;
 
@@ -244,13 +269,17 @@ class TodoList extends Component{
 							<br />
 						</div>
 					</div>
-					<TodoItem 
-						todoList={todoList}
-						handleComplete={this.handleComplete}
-						handleDelete={this.handleDelete}
-						handleEdit={this.handleEdit}
-						handleCheckBoxes={this.handleCheckBoxes}
-					/>
+					<DragDropContext
+						onDragEnd={this.onDragEnd}
+					>
+						<TodoItem 
+							todoList={todoList}
+							handleComplete={this.handleComplete}
+							handleDelete={this.handleDelete}
+							handleEdit={this.handleEdit}
+							handleCheckBoxes={this.handleCheckBoxes}
+						/>
+					</DragDropContext>
 				</div>
 			</div>
 		)
