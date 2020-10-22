@@ -7,7 +7,9 @@ class TodoItem extends Component {
 	addTask = (todo, index) => {
 		const {
 			handleComplete,
-			handleDelete, handleEdit,
+			handleDelete,
+			toggleEdit,
+			handleEdit,
 			handleCheckBoxes,
 		} = this.props;
 
@@ -33,24 +35,45 @@ class TodoItem extends Component {
 								className = {`dragIcon`}
 							>
 								&#8942;
-							</span>
 							<input 
 								type="checkbox" 
 								className={`checkBoxes`}
 								onChange={() => handleCheckBoxes(todo.id)}
 							/>
-							<input
+							</span>
+							{/* <input
 								value={todo.name}
 								onChange={(e)=> handleEdit(e.target.value, todo.id)}
 								className={`task`}
-							/>
+							/> */}
+							{
+								todo.toggle ? (
+									<input
+										value={todo.name}
+										onChange={(e)=> handleEdit(e.target.value, todo.id)}
+										className={`task`}
+									/>
+								) : <span
+									className={`task`}
+								>{todo.name}</span>
+							}
 							<div className={`icons`}>
 								<button
 									className={`completeBtn`}
 									onClick={()=>handleComplete(todo.id)}
 									id={todo.id}
 								>
-									&#10004;
+									{
+										todo.completed ? <>&#9746;</> : <>&#10004;</>
+									}
+								</button>
+								<button
+									className={`editBtn`}
+									onClick={() => toggleEdit(todo.id)}
+								>
+									{
+										todo.toggle ? <>&#128190;</> : <>&#9998;</>
+									}
 								</button>
 								<button
 									className={`deleteBtn`}

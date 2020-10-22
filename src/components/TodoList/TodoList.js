@@ -20,22 +20,26 @@ class TodoList extends Component{
 				{
 					name: "buy milk",
 					id: 123,
-					completed: false
+					completed: false,
+					toggleEditk: false
 				},
 				{
 					name: "buy food",
 					id: 124,
-					completed: false
+					completed: false,
+					toggleEdit: false
 				},
 				{
 					name: "buy cadbury",
 					id: 125,
-					completed: false
+					completed: false,
+					toggleEdit: false
 				},
 				{
 					name: "buy peanut",
 					id: 126,
-					completed: false
+					completed: false,
+					toggleEdit: false
 				},
 			],
 			todo: '',
@@ -85,6 +89,24 @@ class TodoList extends Component{
 		this.setState({
 			todoList: [...temp]
 		})
+	}
+
+	toggleEdit = (todoId) =>{
+
+		const { todoList } = this.state;
+		let temp = [...todoList];
+		temp.map((todo)=>{
+			if (todo.id === todoId) {
+				todo.toggle = !todo.toggle;
+			}
+		})
+		this.setState({
+			todoList: temp
+		})
+
+		// this.setState((prevState) => ({
+		// 	toggle: !prevState.toggle
+		// }))
 	}
 
 	handleClearAll = () => {
@@ -278,6 +300,7 @@ class TodoList extends Component{
 							handleDelete={this.handleDelete}
 							handleEdit={this.handleEdit}
 							handleCheckBoxes={this.handleCheckBoxes}
+							toggleEdit={this.toggleEdit}
 						/>
 					</DragDropContext>
 				</div>

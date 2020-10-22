@@ -39,7 +39,7 @@
 	justify-content: space-between;
 }
 
-.listItems.completed input{
+.listItems.completed input, .listItems.completed .task{
 	text-decoration: line-through;
 	color: #000;
 }
@@ -70,20 +70,18 @@
 
 .deleteBtn {
 	border: none;
-	background: rgba(255,0,0,0.6);
+	background: rgba(255,0,0,0.7);
 	outline: none;
 	padding: 5px 10px;
-	/* color: #000; */
 	cursor: pointer;
 }
 
 .editBtn {
-	content: 'U+0270E';
 	border: none;
-	background: rgba(70, 46, 255, 0.6);
+	background: #935900;
+	color: #fff;
 	outline: none;
 	padding: 5px 10px;
-	color: #fff;
 	cursor: pointer;
 }
 
