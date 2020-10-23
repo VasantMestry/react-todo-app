@@ -1,12 +1,22 @@
 import React from 'react';
 import TodoList from './components/TodoList/TodoList.js'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css';
+import Homepage from './components/HomePage/HomePage.js'
+import Nav from './components/Nav/Nav.js';
 
 function App() {
   return (
-    <div className="App">
-      <TodoList />
-    </div>
+    <Router>
+      <div className="App">
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={Homepage} />
+          <Route path="/todo" exact component={TodoList} />
+          <Route path="/gitgame" exact />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

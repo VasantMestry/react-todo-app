@@ -22,16 +22,20 @@
 }*/
 
 .container{
-	display: flex;
+	/* display: flex;
 	align-items: center;
 	justify-content: center;
-	flex-direction: column;
+	flex-direction: column; */
+	background: #303841;
+	min-height: 90vh;
 }
 
 .header h2 {
 	text-align: center;
 	color: #fff;
 	text-transform: uppercase;
+	margin-top: 0;
+	padding: 2vh;
 }
 
 .header input {
